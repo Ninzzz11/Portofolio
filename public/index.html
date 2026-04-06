@@ -335,11 +335,14 @@
                                 </div>
 
                                 <div class="card-actions mt-4">
+                                    <button class="btn btn-primary btn-md open-modal" data-project="funnel1">
+                                        View Project
+                                    </button>
 
-                                    <a href="https://app.gohighlevel.com/v2/preview/044l0PwW0IFHK76f6lvl"
+                                    <!-- <a href="https://app.gohighlevel.com/v2/preview/044l0PwW0IFHK76f6lvl"
                                         target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-md">
                                         View Project
-                                    </a>
+                                    </a> -->
 
                                 </div>
 
@@ -378,12 +381,15 @@
                                 </div>
 
                                 <div class="card-actions mt-4">
+                                    <button class="btn btn-primary btn-md open-modal" data-project="web1">
+                                        View Project
+                                    </button>
 
-                                    <a class="btn btn-primary btn-md"
+                                    <!-- <a class="btn btn-primary btn-md"
                                         href="https://app.gohighlevel.com/v2/preview/LkLK6BUm5neIrbH4GGrV?notrack=true"
                                         target="_blank" rel="noopener noreferrer">
                                         View Project
-                                    </a>
+                                    </a> -->
 
                                 </div>
 
@@ -420,11 +426,14 @@
                                 </div>
 
                                 <div class="card-actions mt-4">
+                                    <button class="btn btn-primary btn-md open-modal" data-project="web2">
+                                        View Project
+                                    </button>
 
-                                    <a href="https://app.gohighlevel.com/v2/preview/Fv0TkKmfiYMGUP7Kw7Ms?notrack=true"
+                                    <!-- <a href="https://app.gohighlevel.com/v2/preview/Fv0TkKmfiYMGUP7Kw7Ms?notrack=true"
                                         target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-md">
                                         View Project
-                                    </a>
+                                    </a> -->
 
                                 </div>
 
@@ -434,9 +443,33 @@
 
                     </div>
 
+                    <!-- MODAL SECTION  -->
+                    <div id="projectModal"
+                        class="fixed inset-0 hidden items-center justify-center bg-black/80 backdrop-blur-sm z-50">
+
+                        <div class="relative w-full max-w-5xl mx-auto p-4">
+
+                            <!-- CLOSE BUTTON -->
+                            <button id="closeModal"
+                                class="absolute top-2 right-2 bg-white text-black px-3 py-1 rounded-full shadow">
+                                ✕
+                            </button>
+
+                            <!-- CONTENT -->
+                            <div class="bg-white rounded-xl overflow-hidden">
+
+                                <div class="max-h-[90vh] overflow-y-auto">
+                                    <img id="modalImage" class="w-full object-contain" src="">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
 
                     <!-- WORDPRESS PROJECT -->
-                                        <div class="project-card wordpress h-full">
+                    <div class="project-card wordpress h-full">
 
                         <div
                             class="card bg-base-200 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group h-full">
@@ -469,8 +502,8 @@
 
                                 <div class="card-actions mt-4">
 
-                                    <a href="https://ronalyn.makkastudio.com/" target="_blank"
-                                        rel="noopener noreferrer" class="btn btn-primary btn-md">
+                                    <a href="https://ronalyn.makkastudio.com/" target="_blank" rel="noopener noreferrer"
+                                        class="btn btn-primary btn-md">
                                         View Project
                                     </a>
 
@@ -1198,6 +1231,53 @@
     <footer class="bg-gray-800 p-4 mt-0 text-center text-gray-400">
         &copy; 2026 Ninio Melendres. All rights reserved.
     </footer>
+
+    <!-- MODAL FUNCTIONALITY -->
+    <script>
+        const modal = document.getElementById('projectModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.getElementById('closeModal');
+
+        // IMAGE MAP
+        const projectImages = {
+            funnel1: '/images/funnel1-long.webp',
+            web1: '/images/ghl1-long.webp',
+            web2: '/images/ghl2-long.webp'
+        };
+
+        // OPEN MODAL
+        document.querySelectorAll('.open-modal').forEach(button => {
+            button.addEventListener('click', () => {
+                const project = button.dataset.project;
+
+                modalImg.src = projectImages[project];
+
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+
+                document.body.classList.add('overflow-hidden');
+            });
+        });
+
+        // CLOSE FUNCTION
+        function closeModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            modalImg.src = '';
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // CLOSE EVENTS
+        closeBtn.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
 
 </body>
 
